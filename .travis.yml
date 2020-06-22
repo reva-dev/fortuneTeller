@@ -1,9 +1,17 @@
 language: node_js
+
 node_js:
   - "stable"
+  
 cache:
   directories:
     - node_modules
+    
+services:
+  - docker
+  
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 install:
   - npm install -g codecov
@@ -11,6 +19,8 @@ install:
 script:
   - npm install
   - npm run build
+  - docker build -t revadev/fortune .
+  - docker push revadev/fortune
   - codecov
 
 after_success:
