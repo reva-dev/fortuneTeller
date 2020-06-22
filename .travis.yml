@@ -19,8 +19,8 @@ install:
 script:
   - npm install
   - npm run build
-  - docker build -t revadev/fortune .
-  - docker push revadev/fortune
+  - docker build -t revadev/fortune:latest .
+  - docker push revadev/fortune:latest
   - codecov
 
 after_success:
